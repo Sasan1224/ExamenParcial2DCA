@@ -2,10 +2,13 @@ package View;
 
 import java.util.ArrayList;
 
+import Model.Polo;
+import Model.World;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
-	private ArrayList<Bola>Bolitas;
+	private ArrayList<Polo> Politos;
+	private World Mundo;
 
 	public static void main(String[] args) {
 		PApplet.main(Main.class.getName());
@@ -17,21 +20,24 @@ public class Main extends PApplet {
 	}
 
 	public void setup() {
-		Bolitas = new ArrayList<Bola>();
+		Politos = new ArrayList<Polo>();
+		Mundo = new World(this);
 		for (int i = 0; i < 20; i++) {
 			float posX = random(15, 580);
 			float posY = random(15, 580);
 
-			Bolitas.add(new Bola(posX, posY, this));
+			Politos.add(new Polo(posX, posY, this));
+			
 		}
 	}
 
 	public void draw() {
 		background(255);
-for (Bola Bolita : Bolitas) {
-	Bolita.dibujar();
-	new Thread(Bolita).start();
-	
-}
+		for (Polo Polito : Politos) {
+			Polito.dibujar();
+			new Thread(Polito).start();
+
+		}
+		Mundo.draw();
 	}
 }
